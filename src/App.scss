@@ -4,9 +4,28 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
 
-  .region {
-    position: absolute;
-    box-sizing: border-box;
+.region {
+  position: absolute;
+  box-sizing: border-box;
+
+  &.flex {
+    position: relative;
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    height: 100%;
+
+    .flex-item {
+      height: 50%;
+      text-align: center;
+
+      &.half-top {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+    }
   }
 }
