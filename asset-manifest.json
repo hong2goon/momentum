@@ -1,16 +1,18 @@
 {
   "files": {
-    "main.css": "/momentum/static/css/main.073c9b0a.css",
-    "main.js": "/momentum/static/js/main.51b9e56b.js",
+    "main.css": "/momentum/static/css/main.3990ea7d.css",
+    "main.js": "/momentum/static/js/main.ddaf7e50.js",
     "static/js/787.a88eb028.chunk.js": "/momentum/static/js/787.a88eb028.chunk.js",
-    "static/media/logo.svg": "/momentum/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/1.jpg": "/momentum/static/media/1.c3f10d279dfd64d905a8.jpg",
+    "static/media/2.jpg": "/momentum/static/media/2.5b9a36d857fbc4c6ffde.jpg",
+    "static/media/3.jpg": "/momentum/static/media/3.6d412d00a7754b4ca4fe.jpg",
     "index.html": "/momentum/index.html",
-    "main.073c9b0a.css.map": "/momentum/static/css/main.073c9b0a.css.map",
-    "main.51b9e56b.js.map": "/momentum/static/js/main.51b9e56b.js.map",
+    "main.3990ea7d.css.map": "/momentum/static/css/main.3990ea7d.css.map",
+    "main.ddaf7e50.js.map": "/momentum/static/js/main.ddaf7e50.js.map",
     "787.a88eb028.chunk.js.map": "/momentum/static/js/787.a88eb028.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.51b9e56b.js"
+    "static/css/main.3990ea7d.css",
+    "static/js/main.ddaf7e50.js"
   ]
 }
