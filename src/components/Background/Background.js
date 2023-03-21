@@ -12,6 +12,7 @@ function Background() {
   return (
     <div className="region cover">
       <div className="bg-img" style={bgStyle}></div>
+      <div className="default-bg"></div>
     </div>
   )
 }

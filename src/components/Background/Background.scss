@@ -9,14 +9,29 @@
     z-index: -1;
 
     .bg-img {
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       background: url('../../images/background/1.jpg');
       background-position: 50% 50%;
       background-repeat: no-repeat;
       background-size: cover;
-      animation: fadeIn 0.5s linear;
+      z-index: 1;
+      animation: fadeIn 1s linear;
+    }
+    .default-bg {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../../images/background/1.jpg');
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: 0;
     }
   }
 }

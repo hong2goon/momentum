@@ -1,8 +1,10 @@
 .App {
+  position: relative;
   width: 100vw;
   height: 100vh;
   margin: 0;
   padding: 0;
+  color: #fff;
   box-sizing: border-box;
 }
 
@@ -28,4 +30,24 @@
       }
     }
   }
+
+  &.top {
+    top: 0;
+  }
+
+  &.bottom {
+    bottom: 0;
+  }
+
+  &.left {
+    left: 0;
+  }
+
+  &.right {
+    right: 0;
+  }
+}
+
+.mg-b0 {
+  margin-bottom: 0 !important;
 }

@@ -1,0 +1,29 @@
+.clock-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+
+  .clock {
+    display: inline-block;
+    font-size: 100px;
+    color: #fff;
+    text-shadow: 0 4px 8px rgba(0,0,0,.5);
+
+    span {
+      font-size: 60px;
+    }
+  }
+
+  @media screen and (max-width: 640px){
+    .clock {
+      font-size: 60px;
+
+      span {
+        font-size: 30px;
+      }
+    }
+  }
+}
