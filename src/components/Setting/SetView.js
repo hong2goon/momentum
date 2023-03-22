@@ -1,4 +1,24 @@
-function SetView() {
+import { useState } from 'react';
+
+function SetView( { chkClockMer, chkClockSec }) {
+  const viewMerLS = (localStorage.getItem('viewMeridiem') === 'true' ? true : false);
+  const viewSecLS = (localStorage.getItem('viewSec') === 'true' ? true : false);
+  const [chkMer, setChkMer] = useState(viewMerLS);
+  const [chkSec, setChkSec] = useState(viewSecLS);
+  
+  const chkMerHandler = () => {
+    setChkMer(!chkMer);
+    chkClockMer(!chkMer);
+    chkMer ? localStorage.setItem('viewMeridiem', false) : localStorage.setItem('viewMeridiem', true);
+  }
+  const chkSecHandler = () => {
+    setChkSec(!chkSec);
+    chkSec ? localStorage.setItem('viewSec', false) : localStorage.setItem('viewSec', true);
+    chkClockSec(!chkSec);
+  }
+  const chkStateMeridiem = viewMerLS ? "checked" : false;
+  const chkStateSec = viewSecLS ? "checked" : false;
+
   return(
     <div className="setting-view">
       <div className="set-cont setting">
@@ -9,12 +29,12 @@ function SetView() {
           <ul className="setting-list">
             <li>
               <span className="label"><span>Clock</span></span>
-              {/* <div class="toggle-switch">
+              <div className="toggle-switch">
                 <label>
-                  <input type="checkbox" class="chk-clock" name="clock" value="clock" />
+                  <input type="checkbox" className="chk-clock" checked="checked" disabled />
                   <span>clock</span>
                 </label>
-              </div> */}
+              </div>
             </li>
           </ul>
         </form>
@@ -29,7 +49,7 @@ function SetView() {
               <span className="label"><span>show meridiem(AM/PM)</span></span>
               <div className="toggle-switch">
                 <label>
-                  <input type="checkbox" className="chk-12h" name="12h" value="12h" />
+                  <input type="checkbox" className="chk-meridiem" checked={chkStateMeridiem} onChange={chkMerHandler} />
                   <span>show meridiem(AM/PM)</span>
                 </label>
               </div>
@@ -38,7 +58,7 @@ function SetView() {
               <span className="label"><span>show seconds</span></span>
               <div className="toggle-switch">
                 <label>
-                  <input type="checkbox" className="chk-secName" name="sec" value="sec" />
+                  <input type="checkbox" className="chk-sec" checked={chkStateSec} onChange={chkSecHandler} />
                   <span>show seconds</span>
                 </label>
               </div>
@@ -53,8 +73,8 @@ function SetView() {
           <h3>Info</h3>
           <span>This project is clone coding</span>
           <ul className="list-txt">
-            <li>Origin service : <a href="https://momentumdash.com/" target="_blank">MOMENTUM</a></li>
-            <li>Reference : <a href="https://www.youtube.com/playlist?list=PL7jH19IHhOLM8YwJMTa3UkXZN-LldYnyK" target="_blank">Nomad Coder - JS Basics</a></li>
+            <li>Origin service : <a href="https://momentumdash.com/" target="_blank" rel="noreferrer noopener">MOMENTUM</a></li>
+            <li>Reference : <a href="https://www.youtube.com/playlist?list=PL7jH19IHhOLM8YwJMTa3UkXZN-LldYnyK" target="_blank" rel="noreferrer noopener">Nomad Coder - JS Basics</a></li>
           </ul>
         </div>
       </div>

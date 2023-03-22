@@ -1,31 +1,21 @@
 import { useState } from 'react';
+
 import NavWrap from './NavWrap';
 import SetView from './SetView';
 import './Setting.scss';
 
-function Setting({ chkClockSec, chkClockMer }) {
-  const viewSecLS = localStorage.getItem('viewSec');
-  const viewMerLS = localStorage.getItem('viewMeridiem');
-
-  const [chkSec, setChkSec] = useState(!Boolean(viewSecLS));
-  const [chkMer, setChkMer] = useState(!Boolean(viewMerLS));
-
-  if(viewSecLS == null) {
-    localStorage.setItem('viewSec', false);
+  function Setting( { getMer, getSec }) {
+  const viewMerLS = (localStorage.getItem('viewMeridiem') === 'true' ? true : false);
+  const viewSecLS = (localStorage.getItem('viewSec') === 'true' ? true : false);
+  const [clockMer, setClockMer] = useState(viewMerLS);
+  const [clockSec, setClockSec] = useState(viewSecLS);
+  const chkClockMer = (x) => {
+    setClockMer(x);
+    getMer(clockMer);
   }
-  if(viewMerLS == null) {
-    localStorage.setItem('viewMeridiem', false);
-  }
-  
-  const chkSecHandler = () => {
-    setChkSec(!chkSec);
-    chkClockSec(!chkSec);
-    chkSec ? localStorage.setItem('viewSec', false) : localStorage.setItem('viewSec', true);
-  }
-  const chkMerHandler = () => {
-    setChkMer(!chkMer);
-    chkClockMer(!chkMer);
-    chkMer ? localStorage.setItem('viewMeridiem', false) : localStorage.setItem('viewMeridiem', true);
+  const chkClockSec = (x) => {
+    setClockSec(x);
+    getSec(clockSec);
   }
 
   const toggleCls = (e) => {
@@ -48,22 +38,25 @@ function Setting({ chkClockSec, chkClockMer }) {
     itemMenu[0].parentElement.classList.add('active');
     itemView[0].classList.add('active');
   }
-  
+
   return (
     <div className="region bottom right">
       <div className="setting">
         <div className="setting-panel-wrap">
           <div className="setting-panel">
             <NavWrap />
-            <SetView />
-            <div style={{position: 'absolute', top: 0, right: 0}}>
+            <SetView 
+              chkClockMer={chkClockMer}
+              chkClockSec={chkClockSec}
+            />
+            {/* <div style={{position: 'absolute', top: 0, right: 0}}>
               <label>
                 <input id="setSec" type="checkbox" onChange={chkSecHandler} />초
               </label>
               <label>
                 <input id="setMer" type="checkbox" onChange={chkMerHandler} />오전/오후
               </label>
-            </div>
+            </div> */}
           </div>
         </div>
         <button type="button" onClick={toggleCls}><i className="icon">Setting</i></button>

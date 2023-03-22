@@ -1,3 +1,5 @@
+import React from 'react';
+
 import bgImg1 from '../../images/background/1.jpg';
 import bgImg2 from '../../images/background/2.jpg';
 import bgImg3 from '../../images/background/3.jpg';
@@ -17,4 +19,4 @@ function Background() {
   )
 }
 
-export default Background;
+export default React.memo(Background);
