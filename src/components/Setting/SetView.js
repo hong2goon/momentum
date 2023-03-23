@@ -1,6 +1,18 @@
 import { useState } from 'react';
 
-function SetView( { chkClockMer, chkClockSec }) {
+function SetView( { setCmpGreet, chkClockMer, chkClockSec }) {
+  // Compnent 세팅
+  const cmpntVwLS_Greeting = localStorage.getItem('componentGreeting') === 'true' ? true : false;
+  const [cmpntVwGreeting, setCmpntVwGreeting] = useState(cmpntVwLS_Greeting);
+  
+  const chkViewHandler = (e) => {
+    setCmpntVwGreeting(!cmpntVwGreeting);
+    setCmpGreet(!cmpntVwGreeting);
+    cmpntVwGreeting ? localStorage.setItem('componentGreeting', false) : localStorage.setItem('componentGreeting', true); 
+  }
+  const cmpntStGreeting = cmpntVwLS_Greeting ? "checked" : false;
+
+  // Clock 세팅
   const viewMerLS = (localStorage.getItem('viewMeridiem') === 'true' ? true : false);
   const viewSecLS = (localStorage.getItem('viewSec') === 'true' ? true : false);
   const [chkMer, setChkMer] = useState(viewMerLS);
@@ -33,6 +45,15 @@ function SetView( { chkClockMer, chkClockSec }) {
                 <label>
                   <input type="checkbox" className="chk-clock" checked="checked" disabled />
                   <span>clock</span>
+                </label>
+              </div>
+            </li>
+            <li>
+              <span className="label"><span>Greeting</span></span>
+              <div className="toggle-switch">
+                <label>
+                  <input type="checkbox" className="chk-greet" checked={cmpntStGreeting} onChange={chkViewHandler} />
+                  <span>greeting</span>
                 </label>
               </div>
             </li>

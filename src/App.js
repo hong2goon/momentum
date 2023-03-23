@@ -7,6 +7,14 @@ import Setting from './components/Setting/Setting';
 import './App.scss';
 
 function App() {
+  // component 세팅
+  const cpntGreetLS = (localStorage.getItem('componentGreeting') === 'true' ? true : false);
+  const [cpntGreetView, setcpntGreetView] = useState(cpntGreetLS);
+  const getCptGreet = (x) => {
+    setcpntGreetView(!x);
+  }
+
+  // Clock 세팅
   const viewMerLS = (localStorage.getItem('viewMeridiem') === 'true' ? true : false);
   const viewSecLS = (localStorage.getItem('viewSec') === 'true' ? true : false);
   const [getVwMer, setVwMer] = useState(viewMerLS);
@@ -18,13 +26,20 @@ function App() {
     setVwSec(!x);
   }
   
+  // 라이프사이클
   useEffect(() => {
     document.title = 'Momentum (clone coding)';
 
-    if(viewMerLS == null) {
+    // component 초기화
+    //if(cpntGreetLS === false) {
+      //localStorage.setItem('componentGreeting', true);
+    //}
+
+    // clock 초기화
+    if(viewMerLS === null) {
       localStorage.setItem('viewMeridiem', false);
     }
-    if(viewSecLS == null) {
+    if(viewSecLS === null) {
       localStorage.setItem('viewSec', false);
     }
   }, [viewMerLS, viewSecLS]);
@@ -34,17 +49,16 @@ function App() {
       <div className="region flex">
         <div className="flex-item half-top">
           <Clock chkSec={getVwSec} chkMer={getVwMer} />
-          <Greeting />
+          {cpntGreetView === true ? <Greeting /> : null}
         </div>
         <div className="flex-item half-bottom">
           투두리스트 들어갈 자리
         </div>
       </div>
       <Setting 
+        getCptGreet={getCptGreet}
         getMer={getMer}
         getSec={getSec}
-        // chkClockSec={chkClockSec} 
-        // chkClockMer={chkClockMer} 
       />
       <Background />
     </div>
