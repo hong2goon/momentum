@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Background from './components/Background/Background';
 import Clock from './components/Clock/Clock';
+import Greeting from './components/Greeting/Greeting';
 import Setting from './components/Setting/Setting';
 import './App.scss';
 
@@ -33,6 +34,7 @@ function App() {
       <div className="region flex">
         <div className="flex-item half-top">
           <Clock chkSec={getVwSec} chkMer={getVwMer} />
+          <Greeting />
         </div>
         <div className="flex-item half-bottom">
           투두리스트 들어갈 자리
