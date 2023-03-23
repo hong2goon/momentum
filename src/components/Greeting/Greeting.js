@@ -9,7 +9,6 @@ function Greeting() {
   const [viewGreet, setViewGreet] = useState(getUsername === null ? ' hide' : '');
  
   useEffect(() => {
-    console.log(getUsername);
   }, [getUsername]);
 
   const submitUserName = (e) => {
