@@ -3,8 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Background from './components/Background/Background';
 import Clock from './components/Clock/Clock';
 import Greeting from './components/Greeting/Greeting';
+import Weather from './components/Weather/Weather';
 import Setting from './components/Setting/Setting';
 import './App.scss';
+
+
 
 function App() {
   // component 세팅
@@ -25,7 +28,7 @@ function App() {
   const getSec = (x) => {
     setVwSec(!x);
   }
-  
+
   // 라이프사이클
   useEffect(() => {
     document.title = 'Momentum (clone coding)';
@@ -55,11 +58,16 @@ function App() {
           투두리스트 들어갈 자리
         </div>
       </div>
-      <Setting 
-        getCptGreet={getCptGreet}
-        getMer={getMer}
-        getSec={getSec}
-      />
+      <div className="region top right">
+        <Weather />
+      </div>
+      <div className="region bottom right">
+        <Setting 
+          getCptGreet={getCptGreet}
+          getMer={getMer}
+          getSec={getSec}
+        />
+      </div>
       <Background />
     </div>
   );

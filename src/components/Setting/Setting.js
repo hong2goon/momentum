@@ -50,20 +50,18 @@ function Setting( { getCptGreet, getMer, getSec }) {
   }
 
   return (
-    <div className="region bottom right">
-      <div className="setting">
-        <div className="setting-panel-wrap">
-          <div className="setting-panel">
-            <NavWrap />
-            <SetView 
-              setCmpGreet={setCmpGreet}
-              chkClockMer={chkClockMer}
-              chkClockSec={chkClockSec}
-            />
-          </div>
+    <div className="setting">
+      <div className="setting-panel-wrap">
+        <div className="setting-panel">
+          <NavWrap />
+          <SetView 
+            setCmpGreet={setCmpGreet}
+            chkClockMer={chkClockMer}
+            chkClockSec={chkClockSec}
+          />
         </div>
-        <button type="button" onClick={toggleCls}><i className="icon">Setting</i></button>
       </div>
+      <button type="button" onClick={toggleCls}><i className="icon">Setting</i></button>
     </div>
   )
 }
