@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Weather.scss';
 
 const api = {
@@ -44,17 +44,17 @@ function Weather( {getWInfo} ){
     });
   } 
 
-  const handleGeoSucces = (position) => {
-    const latitude = position.coords.latitude,
-        longitude = position.coords.longitude;
-    getWeather(latitude, longitude);
-  }
-
-  const handleGeoError = () => {
-    console.log('Cant access geo location');
-  } 
-
-  navigator.geolocation.getCurrentPosition(handleGeoSucces, handleGeoError);  
+  useEffect(() => {
+    const handleGeoSucces = (position) => {
+      const latitude = position.coords.latitude,
+          longitude = position.coords.longitude;
+      getWeather(latitude, longitude);
+    }
+    const handleGeoError = () => {
+      console.log('Cant access geo location');
+    } 
+    navigator.geolocation.getCurrentPosition(handleGeoSucces, handleGeoError);  
+  });
 
   iconUrl = 'http://openweathermap.org/img/w/' + getWeaIcon + '.png';
 
