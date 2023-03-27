@@ -4,13 +4,19 @@ import NavWrap from './NavWrap';
 import SetView from './SetView';
 import './Setting.scss';
 
-function Setting( { getCptGreet, getMer, getSec }) {
+function Setting( { getCptGreet, getCptWeather, getMer, getSec, weathersInfo }) {
   // 컴포넌트 세팅(데이터 상위 전달)
   const cmpntVwLS_Greeting = localStorage.getItem('componentGreeting') === 'true' ? true : false;
+  const cmpntVwLS_Weather = localStorage.getItem('componentWeather') === 'true' ? true : false;
   const [cmpntVwGreeting, setCmpntVwGreeting] = useState(cmpntVwLS_Greeting);
+  const [cmpntVwWeather, setCmpntVwWeather] = useState(cmpntVwLS_Weather);
   const setCmpGreet = (x) => {
     setCmpntVwGreeting(x);
     getCptGreet(cmpntVwGreeting);
+  }
+  const setCmpWeather = (x) => {
+    setCmpntVwWeather(x);
+    getCptWeather(cmpntVwWeather);
   }
 
   // Clock 세팅(데이터 상위 전달)
@@ -56,8 +62,10 @@ function Setting( { getCptGreet, getMer, getSec }) {
           <NavWrap />
           <SetView 
             setCmpGreet={setCmpGreet}
+            setCmpWeather={setCmpWeather}
             chkClockMer={chkClockMer}
             chkClockSec={chkClockSec}
+            weathersInfo={weathersInfo}
           />
         </div>
       </div>

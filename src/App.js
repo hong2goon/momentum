@@ -12,9 +12,14 @@ import './App.scss';
 function App() {
   // component 세팅
   const cpntGreetLS = (localStorage.getItem('componentGreeting') === 'true' ? true : false);
+  const cpntWeatherLS = (localStorage.getItem('componentWeather') === 'true' ? true : false);
   const [cpntGreetView, setcpntGreetView] = useState(cpntGreetLS);
+  const [cpntWeatherView, setcpntWeatherView] = useState(cpntWeatherLS);
   const getCptGreet = (x) => {
     setcpntGreetView(!x);
+  }
+  const getCptWeather = (x) => {
+    setcpntWeatherView(!x);
   }
 
   // Clock 세팅
@@ -27,6 +32,12 @@ function App() {
   }
   const getSec = (x) => {
     setVwSec(!x);
+  }
+
+  // Weather 정보 가져오기
+  const [weathersInfo, setWeathersInfo] = useState([]);
+  const getWInfo = (x) => {
+    setWeathersInfo(x);
   }
 
   // 라이프사이클
@@ -59,13 +70,15 @@ function App() {
         </div>
       </div>
       <div className="region top right">
-        <Weather />
+      {cpntWeatherView === true ? <Weather getWInfo={getWInfo} /> : null}
       </div>
       <div className="region bottom right">
         <Setting 
           getCptGreet={getCptGreet}
+          getCptWeather={getCptWeather}
           getMer={getMer}
           getSec={getSec}
+          weathersInfo={weathersInfo}
         />
       </div>
       <Background />

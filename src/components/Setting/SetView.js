@@ -1,16 +1,24 @@
 import { useState } from 'react';
 
-function SetView( { setCmpGreet, chkClockMer, chkClockSec }) {
+function SetView( { setCmpGreet, setCmpWeather, chkClockMer, chkClockSec, weathersInfo }) {
   // Compnent 세팅
   const cmpntVwLS_Greeting = localStorage.getItem('componentGreeting') === 'true' ? true : false;
+  const cmpntVwLS_Weather = localStorage.getItem('componentWeather') === 'true' ? true : false;
   const [cmpntVwGreeting, setCmpntVwGreeting] = useState(cmpntVwLS_Greeting);
+  const [cmpntVwWeather, setCmpntVwWeather] = useState(cmpntVwLS_Weather);
   
-  const chkViewHandler = (e) => {
+  const chkGreetViewHandler = (e) => {
     setCmpntVwGreeting(!cmpntVwGreeting);
     setCmpGreet(!cmpntVwGreeting);
     cmpntVwGreeting ? localStorage.setItem('componentGreeting', false) : localStorage.setItem('componentGreeting', true); 
   }
+  const chkWeatherViewHandler = (e) => {
+    setCmpntVwWeather(!cmpntVwWeather);
+    setCmpWeather(!cmpntVwWeather);
+    cmpntVwWeather ? localStorage.setItem('componentWeather', false) : localStorage.setItem('componentWeather', true); 
+  }
   const cmpntStGreeting = cmpntVwLS_Greeting ? "checked" : false;
+  const cmpntStWeather = cmpntVwLS_Weather ? "checked" : false;
 
   // Clock 세팅
   const viewMerLS = (localStorage.getItem('viewMeridiem') === 'true' ? true : false);
@@ -33,6 +41,7 @@ function SetView( { setCmpGreet, chkClockMer, chkClockSec }) {
 
   return(
     <div className="setting-view">
+      {/* setting */}
       <div className="set-cont setting">
         <form className="js-settingForm js-settingForm1">
           <h2>Setting</h2>
@@ -52,14 +61,24 @@ function SetView( { setCmpGreet, chkClockMer, chkClockSec }) {
               <span className="label"><span>Greeting</span></span>
               <div className="toggle-switch">
                 <label>
-                  <input type="checkbox" className="chk-greet" checked={cmpntStGreeting} onChange={chkViewHandler} />
+                  <input type="checkbox" className="chk-greet" checked={cmpntStGreeting} onChange={chkGreetViewHandler} />
                   <span>greeting</span>
+                </label>
+              </div>
+            </li>
+            <li>
+              <span className="label"><span>Weather</span></span>
+              <div className="toggle-switch">
+                <label>
+                  <input type="checkbox" className="chk-weather" checked={cmpntStWeather} onChange={chkWeatherViewHandler} />
+                  <span>weather</span>
                 </label>
               </div>
             </li>
           </ul>
         </form>
       </div>
+      {/* clock */}
       <div className="set-cont clock">
         <form className="js-settingForm js-settingForm2">
           <h2>Clock</h2>
@@ -87,6 +106,91 @@ function SetView( { setCmpGreet, chkClockMer, chkClockSec }) {
           </ul>
         </form>
       </div>
+      {/* weather */}
+      <div className="set-cont weather">
+        <div className="js-settingForm">
+          <h2 className="mg-b0">Weather</h2>
+          <span>Information is taken from OpenWeather API</span>
+
+          <ul className="weather-info">
+            <li>
+              <span>
+                <strong>현재위치</strong>
+                location
+              </span>
+              <span className="value">{weathersInfo.location}</span>
+            </li>
+            <li>
+              <span>
+                <strong>날씨</strong>
+                weather
+              </span>
+              <span className="value">
+                <span>{weathersInfo.weather}</span><span>({weathersInfo.weatherDesc})</span>
+              </span>
+            </li>
+            <li>
+              <span>
+                <strong>현재온도</strong>
+                Current temperature
+              </span>
+              <span className="value">
+                <span>{weathersInfo.temperature}</span>
+                <span className="degree">℃</span>
+              </span>
+            </li>
+            <li>
+              <span>
+                <strong>체감온도</strong>
+                Feeling temperature
+              </span>
+              <span className="value">
+                <span>{weathersInfo.tempFeelLike}</span>
+                <span className="degree">℃</span>
+              </span>
+            </li>
+            <li>
+              <span>
+                <strong>최고기온</strong>
+                Max temperature
+              </span>
+              <span className="value">
+                <span>{weathersInfo.tempMax}</span>
+                <span className="degree">℃</span>
+              </span>
+            </li>
+            <li>
+              <span>
+                <strong>최저기온</strong>
+                Min temperature
+              </span>
+              <span className="value">
+                <span>{weathersInfo.tempMin}</span>
+                <span className="degree">℃</span>
+              </span>
+            </li>
+            <li>
+              <span>
+                <strong>일출</strong>
+                sunrise
+              </span>
+              <span className="value">
+                <span>{weathersInfo.sunrise}</span>
+              </span>
+            </li>
+            <li>
+              <span>
+                <strong>일몰</strong>
+                sunset
+              </span>
+              <span className="value">
+                <span>{weathersInfo.sunset}</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      {/* about */}
       <div className="set-cont about">
         <div className="js-settingForm">
           <h2 className="mg-b0">About</h2>

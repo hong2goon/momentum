@@ -28,8 +28,8 @@ function NavWrap() {
       <ul className="nav-menu">
         <li className="nav-item active"><a href="#setting" onClick={handleLayer}>Setting</a></li>
         <li className="nav-item"><a href="#clock" onClick={handleLayer}>Clock</a></li>
-        {/* <li className="nav-item"><a href="#weather">Weather</a></li>
-        <li className="nav-item"><a href="#todo">Todo</a></li> */}
+        <li className="nav-item"><a href="#weather" onClick={handleLayer}>Weather</a></li>
+        {/* <li className="nav-item"><a href="#todo">Todo</a></li> */}
       </ul>
       <div className="link-wrap">
         <a href="#about" onClick={handleLayer}>About</a>

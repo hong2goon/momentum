@@ -1,65 +1,71 @@
 
-import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import React, { useState } from 'react';
+import './Weather.scss';
 
 const api = {
   key: "8743111fa6f5791c62e48884c89d323a",
   base: "https://api.openweathermap.org/data/2.5/",
 }
 
-function Weather(){
-  const [data, setData] = useState([]);
-  //const url = `${api.base}weather/?lat=${lat}&lon=${lon}&units=metric&APPID=${api.key}`;
+function Weather( {getWInfo} ){
+  const [getTemp, setTemp] = useState('');
+  const [getWeaIcon, setWeaIcon] = useState('');
+  const [getWeaDesc, setWeaDesc] = useState('');
+  const [getLocal, setLocal] = useState('');
+
+  let iconUrl ='';
+  const getWeather = (lat, lon) => {
+    fetch(`${api.base}weather?lat=${lat}&lon=${lon}&appid=${api.key}&units=metric`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(json) {
+      const temperature = json.main.temp;
+      const weaDescript = json.weather[0].description;
+      const weaIcoCode = json.weather[0].icon;
+      const location = json.name;
+      const weatherInfo = {
+        location: json.name, 
+        weather: json.weather[0].main,
+        weatherDesc: json.weather[0].description,
+        temperature: json.main.temp,
+        tempFeelLike: json.main.feels_like,
+        tempMax: json.main.temp_max,
+        tempMin: json.main.temp_min,
+        sunrise: new Date(json.sys.sunrise * 1000).toTimeString().split(' ')[0],
+        sunset: new Date(json.sys.sunset * 1000).toTimeString().split(' ')[0],
+      };
+   
+      setTemp(temperature);
+      setWeaDesc(weaDescript);
+      setWeaIcon(weaIcoCode);
+      setLocal(location);
+      getWInfo(weatherInfo);
+    });
+  } 
 
   const handleGeoSucces = (position) => {
     const latitude = position.coords.latitude,
         longitude = position.coords.longitude;
     getWeather(latitude, longitude);
   }
+
   const handleGeoError = () => {
     console.log('Cant access geo location');
   } 
-  navigator.geolocation.getCurrentPosition(handleGeoSucces, handleGeoError);
 
-  const getWeather = (lat, lon) => {
-    console.log(lat, lon, api.base, api.key);
-    fetch(`${api.base}weather?lat=${lat}&lon=${lon}&appid=${api.key}&units=metric`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(json) {
-      console.log(json.weather[0]);
-        // const temperature = json.main.temp,
-        //     description = json.weather[0].description,
-        //     iconCode = json.weather[0].icon,
-        //     place = json.name;
-        // metricStat.innerHTML = `<span class="icon-weather"><img src="http://openweathermap.org/img/w/${iconCode}.png" alt="${description}" title="${description}"></span><span class="metric-stat-number">${temperature.toFixed(1)}</span><span class="degree">°</span>`;
-        // metricLocation.innerHTML = `${place}`;
-    });
-  } 
+  navigator.geolocation.getCurrentPosition(handleGeoSucces, handleGeoError);  
 
+  iconUrl = 'http://openweathermap.org/img/w/' + getWeaIcon + '.png';
 
-  useEffect(() => {
-    
-  }, []);
-
-  
-  // const url = `${getBase}weather?lat=${getLoca[0]}&lon=${getLoca[1]}&appid=${getKey}`;
-  //const [weather, setWeather] = useState("");
-  
-  //   const data = responseData.data;
-  //   console.log(data);
-  //   setWeather({
-  //     iconCode: data.weather[0].icon,
-  //     temperature: data.main.temp,
-  //     description: data.weater[0].main,
-  //     location: data.name
-  //   });
-  // });
- 
   return (
     <div className="js-weather">
-      
+      <div className="metric-stat">
+        <span className="ico-weather" style={{backgroundImage: 'url(' + iconUrl + ')'}}>{getWeaDesc}</span>
+        <span className="metric-stat-num">{getTemp}</span>
+        <span className="degree">℃</span>
+      </div>
+      <div className="location">{getLocal}</div>
     </div>
   )
 }
