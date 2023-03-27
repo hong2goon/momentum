@@ -15,11 +15,17 @@ function NavWrap() {
       });
       e.target.classList.add('active');
     }
-   
-    const viewCont = e.target.closest('.setting-panel').querySelectorAll('.setting-view .set-cont');
+    const pannel = e.target.closest('.setting-panel');
+    const viewCont = pannel.querySelectorAll('.setting-view .set-cont');
     const contTarget = e.target.href.split('#');
+
     viewCont.forEach(elm => {
-      elm.classList.contains(contTarget[1]) ? elm.classList.add('active') : elm.classList.remove('active');
+      if(elm.classList.contains(contTarget[1])) {
+        elm.classList.add('active');
+        pannel.style.height = elm.offsetHeight + 20 + 'px';
+      } else {
+        elm.classList.remove('active');
+      }
     });
   }
 

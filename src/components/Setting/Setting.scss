@@ -48,13 +48,23 @@
         right: 10px;
         display: flex;
         padding: 10px 0;
-        width: 100%;
         max-width: 500px;
+        max-height: calc(100vh - 100px);
         background: rgba(0,0,0,.8);
         border-radius: 0.5rem;
         opacity: 0;
         transform: translateY(-5px);
-        transition: all .5s 1s ease-in-out;
+        transition: all .5s ease-in-out;
+
+        ::-webkit-scrollbar {
+          width: 6px;
+          margin-right: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+          height: 30%;
+          background: rgba(255, 255, 255, .35);
+          border-radius: 10px;
+        }
 
         .nav-wrap {
           display: flex;
@@ -112,6 +122,7 @@
 
         .setting-view {
           flex: 1;
+          margin-right: 5px;
           overflow-y: auto;
 
           .set-cont {
