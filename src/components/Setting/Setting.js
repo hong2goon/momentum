@@ -39,8 +39,8 @@ function Setting( { getCptGreet, getCptWeather, getMer, getSec, weathersInfo }) 
     const settingPanel = set.querySelector('.setting-panel');
     set.classList.contains('active') ? set.classList.remove('active') : set.classList.add('active');
     settingPanel.style.width = window.innerWidth - 14 + "px";
+    settingPanel.style.height = "";
     setItemsInit(settingPanel);
-    settingPanel.style.height = settingPanel.offsetHeight + "px";
   }
 
   const setItemsInit = (el) => {

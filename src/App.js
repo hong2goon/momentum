@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import Background from './components/Background/Background';
 import Clock from './components/Clock/Clock';
 import Greeting from './components/Greeting/Greeting';
 import Weather from './components/Weather/Weather';
+import TodoInput from './components/Todo/TodoInput';
 import Setting from './components/Setting/Setting';
 import './App.scss';
 
@@ -40,6 +41,25 @@ function App() {
     setWeathersInfo(x);
   }
 
+  // Todo
+  const todosLS = localStorage.getItem('todos');
+  const [todos, setTodos] = useState([]);
+  // const [selectedTodo, setSelectedTodo] = useState(null);
+  // const [insertToggle, setInsertToggle] = useState(false);
+  const nextId = useRef(1);
+
+  const onInsert = useCallback((text) => {
+    const todo = {
+      id: nextId.current,
+      text,
+      checked: false,
+    };
+    setTodos((todos) => todos.concat(todo)); //concat(): 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열 반환
+    const items = todos.concat(todo);
+    //localStorage.setItem('todos', JSON.parse(localStorage.getItem('todos')).push(JSON.stringify(items)));
+    nextId.current++; //nextId 1씩 더하기
+  }, []);
+
   // 라이프사이클
   useEffect(() => {
     document.title = 'Momentum (clone coding)';
@@ -56,7 +76,12 @@ function App() {
     if(viewSecLS === null) {
       localStorage.setItem('viewSec', false);
     }
-  }, [viewMerLS, viewSecLS]);
+
+    // todo item 체크
+    if(todosLS === null) {
+      localStorage.setItem('todos', []);
+    }
+  }, [viewMerLS, viewSecLS, todosLS]);
 
   return (
     <div className="App">
@@ -66,11 +91,11 @@ function App() {
           {cpntGreetView === true ? <Greeting /> : null}
         </div>
         <div className="flex-item half-bottom">
-          투두리스트 들어갈 자리
+          <TodoInput todos={todos} onInsert={onInsert} />
         </div>
       </div>
       <div className="region top right">
-      {cpntWeatherView === true ? <Weather getWInfo={getWInfo} /> : null}
+        {cpntWeatherView === true ? <Weather getWInfo={getWInfo} /> : null}
       </div>
       <div className="region bottom right">
         <Setting 
