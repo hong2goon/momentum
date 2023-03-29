@@ -43,6 +43,7 @@ function App() {
 
   // Todo
   const todosLS = localStorage.getItem('todos');
+  let todoItems = todosLS !== '' ? JSON.parse(todosLS) : [];
   const [todos, setTodos] = useState([]);
   // const [selectedTodo, setSelectedTodo] = useState(null);
   // const [insertToggle, setInsertToggle] = useState(false);
@@ -55,10 +56,19 @@ function App() {
       checked: false,
     };
     setTodos((todos) => todos.concat(todo)); //concat(): 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열 반환
-    const items = todos.concat(todo);
-    //localStorage.setItem('todos', JSON.parse(localStorage.getItem('todos')).push(JSON.stringify(items)));
+    //localStorage.setItem('todos', JSON.stringify([JSON.parse(todosLS)].concat(todo)));
+    //localStorage.setItem('todos', JSON.stringfy(todoItems.push(todo)));
+    console.log(todoItems.push(todo));
+    if(todosLS === '') {
+    localStorage.setItem('todos', JSON.stringify(todo));
+    } else {
+    //   console.log(JSON.stringify([JSON.parse(todosLS)].concat(todo)));
+    //   localStorage.setItem('todos', JSON.stringify([JSON.parse(todosLS)].concat(todo)));
+    }
+    // console.log([JSON.stringify(todo)], JSON.stringify([JSON.parse(todosLS)].concat(todo)));
+   
     nextId.current++; //nextId 1씩 더하기
-  }, []);
+  }, [todoItems]);
 
   // 라이프사이클
   useEffect(() => {
