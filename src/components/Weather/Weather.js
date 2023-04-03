@@ -44,6 +44,8 @@ function Weather( {getWInfo} ){
     });
   } 
 
+  iconUrl = 'http://openweathermap.org/img/w/' + getWeaIcon + '.png';
+
   useEffect(() => {
     const handleGeoSucces = (position) => {
       const latitude = position.coords.latitude,
@@ -56,12 +58,10 @@ function Weather( {getWInfo} ){
     navigator.geolocation.getCurrentPosition(handleGeoSucces, handleGeoError);  
   });
 
-  iconUrl = 'http://openweathermap.org/img/w/' + getWeaIcon + '.png';
-
   return (
     <div className="js-weather">
       <div className="metric-stat">
-        <span className="ico-weather" style={{backgroundImage: 'url(' + iconUrl + ')'}}>{getWeaDesc}</span>
+        <span className="ico-weather" style={getWeaIcon !== '' ? {backgroundImage: 'url(' + iconUrl + ')'} : null}>{getWeaDesc}</span>
         <span className="metric-stat-num">{getTemp}</span>
         <span className="degree">℃</span>
       </div>
