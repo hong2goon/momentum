@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.css": "/momentum/static/css/main.91fd31f7.css",
-    "main.js": "/momentum/static/js/main.eb2b37ca.js",
+    "main.css": "/momentum/static/css/main.7235e833.css",
+    "main.js": "/momentum/static/js/main.88663820.js",
     "static/js/787.a88eb028.chunk.js": "/momentum/static/js/787.a88eb028.chunk.js",
     "static/media/1.jpg": "/momentum/static/media/1.c3f10d279dfd64d905a8.jpg",
     "static/media/2.jpg": "/momentum/static/media/2.5b9a36d857fbc4c6ffde.jpg",
     "static/media/3.jpg": "/momentum/static/media/3.6d412d00a7754b4ca4fe.jpg",
     "static/media/setting.svg": "/momentum/static/media/setting.aafccb449554a0606361.svg",
+    "static/media/delete.svg": "/momentum/static/media/delete.d65c66113e3972ad7ac3.svg",
     "index.html": "/momentum/index.html",
     "static/media/edit.svg": "/momentum/static/media/edit.1144c4539a96d4b19858.svg",
     "static/media/link.svg": "/momentum/static/media/link.5f9d4a37d05b30e4b508.svg",
-    "main.91fd31f7.css.map": "/momentum/static/css/main.91fd31f7.css.map",
-    "main.eb2b37ca.js.map": "/momentum/static/js/main.eb2b37ca.js.map",
+    "main.7235e833.css.map": "/momentum/static/css/main.7235e833.css.map",
+    "main.88663820.js.map": "/momentum/static/js/main.88663820.js.map",
     "787.a88eb028.chunk.js.map": "/momentum/static/js/787.a88eb028.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.91fd31f7.css",
-    "static/js/main.eb2b37ca.js"
+    "static/css/main.7235e833.css",
+    "static/js/main.88663820.js"
   ]
 }
