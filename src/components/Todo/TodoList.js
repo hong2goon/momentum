@@ -1,18 +1,20 @@
 import './TodoList.scss';
 
-function TodoList({ todos }) {
-  const items = todos.map((todo) => 
+function TodoList({ todosItems }) {
+  const todosLS = todosItems !== null ? (todosItems !== '' ? JSON.parse(todosItems) : []) : [];
+  const todoItems = todosLS.map((todo) =>
     <li key={todo.id} className='todo-item'>
-      {todo.text}
+      <span>{todo.text}</span>
+      <button type="button" className="btn-remove">remove</button>
     </li>
   );
-
+  
   return(
-    <div className={todos.length === 0 ? 'todo-list-wrap' : 'todo-list-wrap active'}>
-      <div className="js-toDoList" style={{height: todos.length === 0 ? 0 : 'auto'}}>
+    <div className={todosLS.length === 0 ? 'todo-list-wrap' : 'todo-list-wrap active'}>
+      <div className="js-toDoList" style={{height: todosLS.length === 0 ? 0 : 'auto'}}>
         <h2>To-Do</h2>
         <ul>
-          {items}
+          {todoItems}
         </ul>
       </div>
     </div>

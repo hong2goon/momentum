@@ -43,11 +43,14 @@ function App() {
 
   // Todo
   const todosLS = localStorage.getItem('todos');
-  let todoItems = todosLS !== '' ? JSON.parse(todosLS) : [];
   const [todos, setTodos] = useState([]);
   // const [selectedTodo, setSelectedTodo] = useState(null);
   // const [insertToggle, setInsertToggle] = useState(false);
-  const nextId = useRef(1);
+
+  let nextId = useRef(todosLS !== null ? (todosLS !== '' ? JSON.parse(todosLS).length + 1 : 1) : 0);
+  if(todosLS === null || todosLS === '') {
+    nextId.current = 1;
+  }
 
   const onInsert = useCallback((text) => {
     const todo = {
@@ -56,28 +59,14 @@ function App() {
       checked: false,
     };
     setTodos((todos) => todos.concat(todo)); //concat(): 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열 반환
-    //localStorage.setItem('todos', JSON.stringify([JSON.parse(todosLS)].concat(todo)));
-    //localStorage.setItem('todos', JSON.stringfy(todoItems.push(todo)));
-    console.log(todoItems.push(todo));
-    if(todosLS === '') {
-    localStorage.setItem('todos', JSON.stringify(todo));
-    } else {
-    //   console.log(JSON.stringify([JSON.parse(todosLS)].concat(todo)));
-    //   localStorage.setItem('todos', JSON.stringify([JSON.parse(todosLS)].concat(todo)));
-    }
-    // console.log([JSON.stringify(todo)], JSON.stringify([JSON.parse(todosLS)].concat(todo)));
-   
+    let todoItems = todosLS !== '' ? JSON.parse(todosLS) : [];
+    localStorage.setItem('todos', JSON.stringify(todoItems.concat(todo)));
     nextId.current++; //nextId 1씩 더하기
-  }, [todoItems]);
+  }, [todosLS]);
 
   // 라이프사이클
   useEffect(() => {
     document.title = 'Momentum (clone coding)';
-
-    // component 초기화
-    //if(cpntGreetLS === false) {
-      //localStorage.setItem('componentGreeting', true);
-    //}
 
     // clock 초기화
     if(viewMerLS === null) {
@@ -101,7 +90,7 @@ function App() {
           {cpntGreetView === true ? <Greeting /> : null}
         </div>
         <div className="flex-item half-bottom">
-          <TodoInput todos={todos} onInsert={onInsert} />
+          <TodoInput todosItems={todosLS} todos={todos} onInsert={onInsert} />
         </div>
       </div>
       <div className="region top right">

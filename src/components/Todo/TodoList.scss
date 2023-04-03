@@ -9,7 +9,7 @@
 
   &.active {
     .js-toDoList {
-      padding: 15px 15px 30px;
+      padding: 15px 15px 20px;
       height: auto;
 
       h2 {
@@ -38,26 +38,35 @@
         }
 
         .todo-item {
+          display: flex;
+          align-items: center;
           position: relative;
-          padding: 6px 10px;
-          text-align: left;
           border-bottom: 1px solid rgba(255,255,255,.3);
-        }
-      }
-    }
 
-    & + .todo-input-wrap {
-      position: relative;
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 50%;
-        display: block;
-        width: calc(100% - 30px);
-        height: 1px;
-        background: rgba(255, 255, 255, .2);
-        transform: translateX(-50%);
+          span {
+            flex: 1;
+            padding: 6px 10px;
+            text-align: left;
+          }
+
+          .btn-remove {
+            display: block;
+            width: 80px;
+            height: 30px;
+            text-indent: -9999px;
+            background: transparent url('../../images/icon/delete.svg') 95% 50% no-repeat;
+            background-size: auto 50%;
+            border: none;
+            outline: none;
+            opacity: .5;
+            cursor: pointer;
+            transition: all .5s ease-in-out;
+
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
       }
     }
   }

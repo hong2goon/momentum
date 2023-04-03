@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import TodoList from './TodoList';
 import './TodoInput.scss';
 
-function TodoInput({todos, onInsert}) {
+function TodoInput({todosItems, todos, onInsert}) {
   const [value, setValue] = useState('');
 
   const onChange = useCallback(
@@ -16,6 +16,10 @@ function TodoInput({todos, onInsert}) {
     e => {
       onInsert(value);
       setValue(''); //value 초기화
+      const itemsUl = document.querySelector('.js-toDoList ul');
+      setTimeout(() => {
+        itemsUl.scrollTo(0, itemsUl.scrollHeight);
+      }, 10);
       //기본이벤트(새로고침) 방지
       e.preventDefault();
     }, 
@@ -46,7 +50,7 @@ function TodoInput({todos, onInsert}) {
       wrapper.querySelector('ul').style.maxHeight = '100px';
     }
   }
-
+  
   useEffect(() => {
     resizeTodoPanel();
   });
@@ -54,7 +58,7 @@ function TodoInput({todos, onInsert}) {
   return(
     <div className="todo-wrap">
       <div className="todo-panel">
-        <TodoList todos={todos} />
+        <TodoList todosItems={todosItems} />
         <div className="todo-input-wrap">
           <form className="js-todo-form" onSubmit={onSubmit}>
             <input type="text" placeholder="Enter a to-do." onChange={onChange} value={value} />
