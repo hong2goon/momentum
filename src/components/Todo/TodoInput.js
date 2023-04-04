@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import TodoList from './TodoList';
 import './TodoInput.scss';
 
-function TodoInput({todosItems, todos, onInsert}) {
+function TodoInput({todosItems, todos, onInsert, removeItem}) {
   const [value, setValue] = useState('');
 
   const onChange = useCallback(
@@ -53,7 +53,13 @@ function TodoInput({todosItems, todos, onInsert}) {
       wrapper.querySelector('ul').style.maxHeight = '100px';
     }
   }
-  
+
+  const removeTodo = useCallback(
+    e => {
+      removeItem(e);
+    }, 
+  [removeItem]);
+
   useEffect(() => {
     resizeTodoPanel();
   });
@@ -61,7 +67,7 @@ function TodoInput({todosItems, todos, onInsert}) {
   return(
     <div className="todo-wrap">
       <div className="todo-panel">
-        <TodoList todosItems={todosItems} />
+        <TodoList todosItems={todosItems} removeTodo={removeTodo} />
         <div className="todo-input-wrap">
           <form className="js-todo-form" onSubmit={onSubmit}>
             <input type="text" placeholder="Enter a to-do." onChange={onChange} value={value} />
