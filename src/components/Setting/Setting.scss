@@ -48,6 +48,7 @@
         right: 10px;
         display: flex;
         padding: 10px 0;
+        min-height: 250px;
         max-width: 500px;
         max-height: calc(100vh - 100px);
         background: rgba(0,0,0,.8);
@@ -337,6 +338,35 @@
 
                   & + li {
                     margin-top: 16px;
+                  }
+                }
+              }
+
+              .sett-todo {
+                margin: 20px 0 0;
+                padding: 0;
+                list-style: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+                li {
+                  display: flex;
+                  align-items: center;
+                  padding: 8px 4px;
+              
+                  span {
+                    flex: 1;
+                  }
+
+                  .btn-reset {
+                    display: block;
+                    width: 64px;
+                    height: 26px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: #fff;
+                    line-height: 26px;
+                    background: #69db7c;
+                    border-radius: 15px;
                   }
                 }
               }

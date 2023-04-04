@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
-function SetView( { setCmpGreet, setCmpWeather, chkClockMer, chkClockSec, weathersInfo }) {
+function SetView( { setCmpGreet, setCmpWeather, setCmpTodo, chkClockMer, chkClockSec, weathersInfo }) {
   // Compnent 세팅
   const cmpntVwLS_Greeting = localStorage.getItem('componentGreeting') === 'true' ? true : false;
   const cmpntVwLS_Weather = localStorage.getItem('componentWeather') === 'true' ? true : false;
+  const cmpntVwLS_Todo = localStorage.getItem('componentTodo') === 'true' ? true : false;
   const [cmpntVwGreeting, setCmpntVwGreeting] = useState(cmpntVwLS_Greeting);
   const [cmpntVwWeather, setCmpntVwWeather] = useState(cmpntVwLS_Weather);
+  const [cmpntVwTodo, setCmpntVwTodo] = useState(cmpntVwLS_Todo);
   
   const chkGreetViewHandler = (e) => {
     setCmpntVwGreeting(!cmpntVwGreeting);
@@ -17,8 +19,15 @@ function SetView( { setCmpGreet, setCmpWeather, chkClockMer, chkClockSec, weathe
     setCmpWeather(!cmpntVwWeather);
     cmpntVwWeather ? localStorage.setItem('componentWeather', false) : localStorage.setItem('componentWeather', true); 
   }
+  const chkTodoViewHandler = (e) => {
+    setCmpntVwTodo(!cmpntVwTodo);
+    setCmpTodo(!cmpntVwTodo);
+    cmpntVwTodo ? localStorage.setItem('componentTodo', false) : localStorage.setItem('componentTodo', true); 
+  }
+
   const cmpntStGreeting = cmpntVwLS_Greeting ? "checked" : false;
   const cmpntStWeather = cmpntVwLS_Weather ? "checked" : false;
+  const cmpntStTodo = cmpntVwLS_Todo ? "checked" : false;
 
   // Clock 세팅
   const viewMerLS = (localStorage.getItem('viewMeridiem') === 'true' ? true : false);
@@ -26,12 +35,12 @@ function SetView( { setCmpGreet, setCmpWeather, chkClockMer, chkClockSec, weathe
   const [chkMer, setChkMer] = useState(viewMerLS);
   const [chkSec, setChkSec] = useState(viewSecLS);
   
-  const chkMerHandler = () => {
+  const chkMerHandler = (e) => {
     setChkMer(!chkMer);
     chkClockMer(!chkMer);
     chkMer ? localStorage.setItem('viewMeridiem', false) : localStorage.setItem('viewMeridiem', true);
   }
-  const chkSecHandler = () => {
+  const chkSecHandler = (e) => {
     setChkSec(!chkSec);
     chkSec ? localStorage.setItem('viewSec', false) : localStorage.setItem('viewSec', true);
     chkClockSec(!chkSec);
@@ -72,6 +81,15 @@ function SetView( { setCmpGreet, setCmpWeather, chkClockMer, chkClockSec, weathe
                 <label>
                   <input type="checkbox" className="chk-weather" checked={cmpntStWeather} onChange={chkWeatherViewHandler} />
                   <span>weather</span>
+                </label>
+              </div>
+            </li>
+            <li>
+              <span className="label"><span>To-Do</span></span>
+              <div className="toggle-switch">
+                <label>
+                  <input type="checkbox" className="chk-todo" checked={cmpntStTodo} onChange={chkTodoViewHandler} />
+                  <span>to-do</span>
                 </label>
               </div>
             </li>
@@ -186,6 +204,30 @@ function SetView( { setCmpGreet, setCmpWeather, chkClockMer, chkClockSec, weathe
               <span className="value">
                 <span>{weathersInfo.sunset}</span>
               </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      {/* todo */}
+      <div className="set-cont todo">
+        <div className="js-settingForm">
+          <h2 className="mg-b0">To-Do</h2>
+          <span>Break your goals into manageable</span>
+
+          <ul className="sett-todo">
+            <li>
+              <span>total</span>
+              <strong></strong>
+            </li>
+            <li>
+              <span>complete</span>
+              <strong></strong>
+            </li>
+            <li>
+              <span>reset</span> 
+              <strong>
+                <button type="button" className="btn-reset">RESET</button>
+              </strong>
             </li>
           </ul>
         </div>

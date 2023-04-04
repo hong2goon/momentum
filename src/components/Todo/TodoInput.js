@@ -29,7 +29,9 @@ function TodoInput({todosItems, todos, onInsert}) {
     const todoPanel = document.querySelector('.todo-panel');
     const todoListWrap = todoPanel.querySelector('.todo-list-wrap');
     const todoInputWrap = todoPanel.querySelector('.todo-input-wrap');
-    todoPanel.style.height = todoListWrap.offsetHeight + todoInputWrap.offsetHeight + 'px';
+    todoPanel.classList.contains('active') ? 
+      todoPanel.style.height = todoListWrap.offsetHeight + todoInputWrap.offsetHeight - 10 + 'px' :
+      todoPanel.style.height = todoListWrap.offsetHeight + todoInputWrap.offsetHeight +'px';
   }
  
   const btnHandler = (e) => {

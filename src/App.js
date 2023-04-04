@@ -14,13 +14,18 @@ function App() {
   // component 세팅
   const cpntGreetLS = (localStorage.getItem('componentGreeting') === 'true' ? true : false);
   const cpntWeatherLS = (localStorage.getItem('componentWeather') === 'true' ? true : false);
+  const cpntTodoLS = (localStorage.getItem('componentTodo') === 'true' ? true : false);
   const [cpntGreetView, setcpntGreetView] = useState(cpntGreetLS);
   const [cpntWeatherView, setcpntWeatherView] = useState(cpntWeatherLS);
+  const [cpntTodoView, setcpntTodoView] = useState(cpntTodoLS);
   const getCptGreet = (x) => {
     setcpntGreetView(!x);
   }
   const getCptWeather = (x) => {
     setcpntWeatherView(!x);
+  }
+  const getCptTodo = (x) => {
+    setcpntTodoView(!x);
   }
 
   // Clock 세팅
@@ -64,6 +69,14 @@ function App() {
     nextId.current++; //nextId 1씩 더하기
   }, [todosLS]);
 
+  const LayerHandler = (e) => {
+    e.stopPropagation();
+    const settingLayer = document.querySelector('.region.bottom .setting');
+    if(settingLayer.classList.contains('active')) {
+      settingLayer.classList.remove('active');
+    }
+  }
+
   // 라이프사이클
   useEffect(() => {
     document.title = 'Momentum (clone coding)';
@@ -83,14 +96,14 @@ function App() {
   }, [viewMerLS, viewSecLS, todosLS]);
 
   return (
-    <div className="App">
+    <div className="App" onClick={LayerHandler}>
       <div className="region flex">
         <div className="flex-item half-top">
           <Clock chkSec={getVwSec} chkMer={getVwMer} />
           {cpntGreetView === true ? <Greeting /> : null}
         </div>
         <div className="flex-item half-bottom">
-          <TodoInput todosItems={todosLS} todos={todos} onInsert={onInsert} />
+          {cpntTodoView === true ? <TodoInput todosItems={todosLS} todos={todos} onInsert={onInsert} /> : null}
         </div>
       </div>
       <div className="region top right">
@@ -100,6 +113,7 @@ function App() {
         <Setting 
           getCptGreet={getCptGreet}
           getCptWeather={getCptWeather}
+          getCptTodo={getCptTodo}
           getMer={getMer}
           getSec={getSec}
           weathersInfo={weathersInfo}

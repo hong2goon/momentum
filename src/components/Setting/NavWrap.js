@@ -1,5 +1,6 @@
 function NavWrap() {
   const handleLayer = (e) => {
+    e.stopPropagation();
     e.preventDefault();
     const navs = e.target.closest('.nav-wrap').querySelectorAll('li');
     if(e.target.parentElement.tagName === 'LI') {
@@ -35,7 +36,7 @@ function NavWrap() {
         <li className="nav-item active"><a href="#setting" onClick={handleLayer}>Setting</a></li>
         <li className="nav-item"><a href="#clock" onClick={handleLayer}>Clock</a></li>
         <li className="nav-item"><a href="#weather" onClick={handleLayer}>Weather</a></li>
-        {/* <li className="nav-item"><a href="#todo">Todo</a></li> */}
+        <li className="nav-item"><a href="#todo" onClick={handleLayer}>To-Do</a></li>
       </ul>
       <div className="link-wrap">
         <a href="#about" onClick={handleLayer}>About</a>
