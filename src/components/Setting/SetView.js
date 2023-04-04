@@ -48,6 +48,12 @@ function SetView( { setCmpGreet, setCmpWeather, setCmpTodo, chkClockMer, chkCloc
   const chkStateMeridiem = viewMerLS ? "checked" : false;
   const chkStateSec = viewSecLS ? "checked" : false;
 
+  // Todo
+  const todoReset = (e) => {
+    e.preventDefault();
+    localStorage.setItem('todos', '');
+  }
+
   return(
     <div className="setting-view">
       {/* setting */}
@@ -226,7 +232,7 @@ function SetView( { setCmpGreet, setCmpWeather, setCmpTodo, chkClockMer, chkCloc
             <li>
               <span>reset</span> 
               <strong>
-                <button type="button" className="btn-reset">RESET</button>
+                <button type="button" className="btn-reset" onClick={todoReset}>RESET</button>
               </strong>
             </li>
           </ul>
