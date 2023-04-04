@@ -4,15 +4,6 @@ import './TodoList.scss';
 function TodoList({ todosItems, removeTodo }) {
   const todosLS = todosItems !== null ? (todosItems !== '' ? JSON.parse(todosItems) : []) : [];
 
-  // const removeTodoItem = (e) => {
-  //   const nodes = [...e.target.closest('ul').querySelectorAll('.btn-remove')];
-  //   const idx = nodes.indexOf(e.target);
-  //   let todosArr = JSON.parse(todosItems);
-  //   todosArr.splice(idx, 1);
-
-  //   localStorage.setItem('todos', JSON.stringify(todosArr));
-  // }
-
   const removeTodoItem = useCallback(
     e => {
       removeTodo(e);
