@@ -11,7 +11,7 @@ function TodoList({ todosItems }) {
   
   return(
     <div className={todosLS.length === 0 ? 'todo-list-wrap' : 'todo-list-wrap active'}>
-      <div className="js-toDoList" style={{height: todosLS.length === 0 ? 0 : 'auto'}}>
+      <div className="js-toDoList">
         <h2>To-Do</h2>
         <ul>
           {todoItems}

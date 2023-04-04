@@ -3,7 +3,6 @@
     padding: 0;
     height: 0;
     text-align: left;
-    overflow: auto;
     box-sizing: border-box;
   }
 
@@ -11,7 +10,7 @@
     .js-toDoList {
       padding: 15px 15px 20px;
       height: auto;
-
+      
       h2 {
         margin: 0;
         padding: 10px;

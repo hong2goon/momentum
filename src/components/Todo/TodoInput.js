@@ -19,7 +19,6 @@ function TodoInput({todosItems, todos, onInsert}) {
       const todoList = document.querySelector('.js-toDoList');
       const itemsUl = todoList.querySelector('ul');
       setTimeout(() => {
-        todoList.style.overflow = 'auto';
         itemsUl.scrollTo(0, itemsUl.scrollHeight);
       }, 10);
       //기본이벤트(새로고침) 방지
@@ -51,13 +50,6 @@ function TodoInput({todosItems, todos, onInsert}) {
       setTimeout(() => {
         wrapper.classList.add('fade-in');
       }, 10);
-      if(todosItems === '') {
-        wrapper.querySelector('.js-toDoList').style.height = '25px';
-        wrapper.querySelector('.js-toDoList').style.overflow = 'hidden';
-      } else {
-        wrapper.querySelector('.js-toDoList').style.height = 'auto';
-        wrapper.querySelector('.js-toDoList').style.overflow = 'auto';
-      }
       wrapper.querySelector('ul').style.maxHeight = '100px';
     }
   }

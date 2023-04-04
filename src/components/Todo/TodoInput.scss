@@ -53,6 +53,12 @@
     }
 
     &.active {
+      .todo-list-wrap {
+        .js-toDoList {
+          min-height: 25px;
+          padding: 15px;
+        }
+      }
       .todo-input-wrap {
         display: block;
         margin-top: -10px;
