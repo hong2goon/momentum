@@ -1,6 +1,7 @@
+import { useCallback } from 'react';
 import { useState } from 'react';
 
-function SetView( { setCmpGreet, setCmpWeather, setCmpTodo, chkClockMer, chkClockSec, weathersInfo }) {
+function SetView( { setCmpGreet, setCmpWeather, setCmpTodo, chkClockMer, chkClockSec, weathersInfo, todos, onTodoReset }) {
   // Compnent 세팅
   const cmpntVwLS_Greeting = localStorage.getItem('componentGreeting') === 'true' ? true : false;
   const cmpntVwLS_Weather = localStorage.getItem('componentWeather') === 'true' ? true : false;
@@ -48,11 +49,11 @@ function SetView( { setCmpGreet, setCmpWeather, setCmpTodo, chkClockMer, chkCloc
   const chkStateMeridiem = viewMerLS ? "checked" : false;
   const chkStateSec = viewSecLS ? "checked" : false;
 
-  // Todo
-  const todoReset = (e) => {
-    e.preventDefault();
-    localStorage.setItem('todos', '');
-  }
+  const onReset = useCallback(
+    e => {
+      onTodoReset(e);
+    }, 
+  [onTodoReset]);
 
   return(
     <div className="setting-view">
@@ -223,7 +224,7 @@ function SetView( { setCmpGreet, setCmpWeather, setCmpTodo, chkClockMer, chkCloc
           <ul className="sett-todo">
             <li>
               <span>total</span>
-              <strong></strong>
+              <strong>{todos.length}</strong>
             </li>
             <li>
               <span>complete</span>
@@ -232,7 +233,7 @@ function SetView( { setCmpGreet, setCmpWeather, setCmpTodo, chkClockMer, chkCloc
             <li>
               <span>reset</span> 
               <strong>
-                <button type="button" className="btn-reset" onClick={todoReset}>RESET</button>
+                <button type="button" className="btn-reset" onClick={onReset}>RESET</button>
               </strong>
             </li>
           </ul>

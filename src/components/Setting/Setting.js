@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import NavWrap from './NavWrap';
 import SetView from './SetView';
 import './Setting.scss';
 
-function Setting( { getCptGreet, getCptWeather, getCptTodo, getMer, getSec, weathersInfo }) {
+function Setting( { getCptGreet, getCptWeather, getCptTodo, getMer, getSec, weathersInfo, todos, todoReset }) {
   // 컴포넌트 세팅(데이터 상위 전달)
   const cmpntVwLS_Greeting = localStorage.getItem('componentGreeting') === 'true' ? true : false;
   const cmpntVwLS_Weather = localStorage.getItem('componentWeather') === 'true' ? true : false;
@@ -38,6 +38,15 @@ function Setting( { getCptGreet, getCptWeather, getCptTodo, getMer, getSec, weat
     setClockSec(x);
     getSec(clockSec);
   }
+
+  // Todo 
+  const onTodoReset = useCallback(
+    e => {
+      todoReset(e);
+    }, 
+  [todoReset]);
+    
+  
 
   // 세팅 메뉴 및 패널
   const toggleCls = (e) => {
@@ -79,6 +88,8 @@ function Setting( { getCptGreet, getCptWeather, getCptTodo, getMer, getSec, weat
             chkClockMer={chkClockMer}
             chkClockSec={chkClockSec}
             weathersInfo={weathersInfo}
+            todos={todos}
+            onTodoReset={onTodoReset}
           />
         </div>
       </div>

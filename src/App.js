@@ -48,9 +48,9 @@ function App() {
 
   // Todo
   const todosLS = localStorage.getItem('todos');
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(todosLS !== '' ? JSON.parse(todosLS) : []);
   // const [selectedTodo, setSelectedTodo] = useState(null);
-
+  
   let nextId = useRef(todosLS !== null ? (todosLS !== '' ? JSON.parse(todosLS).length + 1 : 1) : 0);
   if(todosLS === null || todosLS === '') {
     nextId.current = 1;
@@ -73,9 +73,19 @@ function App() {
     const idx = nodes.indexOf(e.target);
     let todosArr = JSON.parse(todosLS);
     todosArr.splice(idx, 1);
+    todosArr.forEach((el, index) => {
+      el.id = index + 1;
+    });
     localStorage.setItem('todos', JSON.stringify(todosArr));
+    setTodos(JSON.parse(localStorage.getItem('todos')));
     nextId.current--;
   }, [todosLS]);
+
+  const todoReset = useCallback((e) => {
+    localStorage.setItem('todos', '');
+    setTodos([]);
+    nextId.current = 1;
+  }, []);
 
   const LayerHandler = (e) => {
     e.stopPropagation();
@@ -125,6 +135,8 @@ function App() {
           getMer={getMer}
           getSec={getSec}
           weathersInfo={weathersInfo}
+          todos={todos}
+          todoReset={todoReset}
         />
       </div>
       <Background />
