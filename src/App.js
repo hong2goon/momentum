@@ -49,8 +49,6 @@ function App() {
   // Todo
   const todosLS = localStorage.getItem('todos');
   const [todos, setTodos] = useState(todosLS !== '' ? JSON.parse(todosLS) : []);
-  // const [selectedTodo, setSelectedTodo] = useState(null);
-  
   let nextId = useRef(todosLS !== null ? (todosLS !== '' ? JSON.parse(todosLS).length + 1 : 1) : 0);
   if(todosLS === null || todosLS === '') {
     nextId.current = 1;
@@ -66,6 +64,21 @@ function App() {
     let todoItems = todosLS !== '' ? JSON.parse(todosLS) : [];
     localStorage.setItem('todos', JSON.stringify(todoItems.concat(todo)));
     nextId.current++; //nextId 1씩 더하기
+  }, [todosLS]);
+
+  const chkTodoItm = useCallback((e) => {
+    let todosArr = JSON.parse(todosLS);
+    const nodes = [...e.target.closest('ul').querySelectorAll('.chk-todo')];
+    const idx = nodes.indexOf(e.target);
+    let selected = [];
+    todosArr.forEach((el, index) => {
+      if(index === idx) {
+        el.checked = !el.checked;
+      }
+      selected.push(el.checked);
+    });
+    localStorage.setItem('todos', JSON.stringify(todosArr));
+    setTodos(JSON.parse(localStorage.getItem('todos')));
   }, [todosLS]);
 
   const removeItem = useCallback((e) => {
@@ -121,7 +134,7 @@ function App() {
           {cpntGreetView === true ? <Greeting /> : null}
         </div>
         <div className="flex-item half-bottom">
-          {cpntTodoView === true ? <TodoInput todosItems={todosLS} todos={todos} onInsert={onInsert} removeItem={removeItem} /> : null}
+          {cpntTodoView === true ? <TodoInput todosItems={todosLS} todos={todos} onInsert={onInsert} chkTodoItm={chkTodoItm} removeItem={removeItem} /> : null}
         </div>
       </div>
       <div className="region top right">

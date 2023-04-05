@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import TodoList from './TodoList';
 import './TodoInput.scss';
 
-function TodoInput({todosItems, todos, onInsert, removeItem}) {
+function TodoInput({todosItems, todos, onInsert, chkStates, chkTodoItm, removeItem}) {
   const [value, setValue] = useState('');
 
   const onChange = useCallback(
@@ -54,6 +54,12 @@ function TodoInput({todosItems, todos, onInsert, removeItem}) {
     }
   }
 
+  const onChkTodo = useCallback(
+    e => {
+      chkTodoItm(e);
+    },
+  [chkTodoItm]);
+
   const removeTodo = useCallback(
     e => {
       removeItem(e);
@@ -67,7 +73,7 @@ function TodoInput({todosItems, todos, onInsert, removeItem}) {
   return(
     <div className="todo-wrap">
       <div className="todo-panel">
-        <TodoList todosItems={todosItems} removeTodo={removeTodo} />
+        <TodoList todosItems={todosItems} onChkTodo={onChkTodo} removeTodo={removeTodo} />
         <div className="todo-input-wrap">
           <form className="js-todo-form" onSubmit={onSubmit}>
             <input type="text" placeholder="Enter a to-do." onChange={onChange} value={value} />

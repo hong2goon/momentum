@@ -1,8 +1,14 @@
 import { useCallback } from 'react';
 import './TodoList.scss';
 
-function TodoList({ todosItems, removeTodo }) {
+function TodoList({ todosItems, onChkTodo, removeTodo }) {
   const todosLS = todosItems !== null ? (todosItems !== '' ? JSON.parse(todosItems) : []) : [];
+
+  const onChkTodoHandler = useCallback(
+    e => {
+      onChkTodo(e);
+    }, 
+  [onChkTodo]);
 
   const removeTodoItem = useCallback(
     e => {
@@ -10,10 +16,12 @@ function TodoList({ todosItems, removeTodo }) {
     }, 
   [removeTodo]);
 
-
   const todoItems = todosLS.map((todo) =>
     <li key={todo.id} className='todo-item'>
-      <span>{todo.text}</span>
+      <label>
+        <input type="checkbox" className="chk-todo" checked={todo.checked} onChange={onChkTodoHandler}></input>
+        <span>{todo.text}</span>
+      </label>
       <button type="button" className="btn-remove" onClick={removeTodoItem}>remove</button>
     </li>
   );

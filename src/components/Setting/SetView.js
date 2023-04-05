@@ -49,6 +49,18 @@ function SetView( { setCmpGreet, setCmpWeather, setCmpTodo, chkClockMer, chkCloc
   const chkStateMeridiem = viewMerLS ? "checked" : false;
   const chkStateSec = viewSecLS ? "checked" : false;
 
+  let cntChkTodo = 0;
+  if(todos.length > 1) {
+    todos.forEach(el => {
+      if(el.checked) {
+        cntChkTodo++;
+      }
+    });
+  } else {
+    cntChkTodo = 0;
+  }
+    
+  
   const onReset = useCallback(
     e => {
       onTodoReset(e);
@@ -228,7 +240,7 @@ function SetView( { setCmpGreet, setCmpWeather, setCmpTodo, chkClockMer, chkCloc
             </li>
             <li>
               <span>complete</span>
-              <strong></strong>
+              <strong>{cntChkTodo}</strong>
             </li>
             <li>
               <span>reset</span> 
